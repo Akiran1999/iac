@@ -36,3 +36,5 @@ resource "aws_s3_bucket" "testbucket10092022" {
     Environment = "Dev"
   }
 }
+
+#below block creates AWS Security group
