@@ -1,7 +1,7 @@
 resource "aws_security_group" "demo-sg-1" {
-  name = "sec-grp"
+  name        = "sec-grp"
   description = "Allow below  traffic via Terraform"
-  vpc_id = aws_vpc.demo-vpc.id
+  vpc_id      = aws_vpc.demo-vpc.id
 
   ingress {
     from_port   = 22
@@ -19,7 +19,7 @@ resource "aws_security_group" "demo-sg-1" {
 }
 
 resource "aws_security_group" "demo-sg" {
-  name = "sec-grp"
+  name        = "sec-grp"
   description = "Allow below  traffic via Terraform"
 
   ingress {
