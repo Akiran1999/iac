@@ -50,6 +50,7 @@ resource "aws_instance" "Demo-instance" {
     instance_type = "t2.micro"
     subnet_id = aws_subnet.pub_subnet1.id
     key_name = "myawsdemokey"
+    vpc_security_group_ids = [aws_security_group.demo-sg-1.id]
 
     tags = {
         Name = "Demo-instance"
