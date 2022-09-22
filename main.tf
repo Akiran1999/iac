@@ -10,11 +10,11 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 resource "aws_vpc" "demo-vpc" {
-  cidr_block           = "10.10.0.0/16"
+  cidr_block           = var.aws_vpc
   enable_dns_support   = true
   enable_dns_hostnames = true
 
@@ -26,8 +26,8 @@ resource "aws_vpc" "demo-vpc" {
 resource "aws_subnet" "pub_subnet1" {
 
   vpc_id                  = aws_vpc.demo-vpc.id
-  availability_zone       = "us-east-1a"
-  cidr_block              = "10.10.0.0/24"
+  availability_zone       = var.availability_zone
+  cidr_block              = var.public_subnet_cidr
   map_public_ip_on_launch = true
   tags = {
     Name = "pub-subnet1"
@@ -36,8 +36,8 @@ resource "aws_subnet" "pub_subnet1" {
 
 resource "aws_subnet" "private-subnet1" {
   vpc_id                  = aws_vpc.demo-vpc.id
-  availability_zone       = "us-east-1a"
-  cidr_block              = "10.10.1.0/24"
+  availability_zone       = var.availability_zone
+  cidr_block              = var.private_subnet_cidr
   map_public_ip_on_launch = false
 
   tags = {
@@ -46,10 +46,10 @@ resource "aws_subnet" "private-subnet1" {
 }
 
 resource "aws_instance" "Demo-instance" {
-  ami                    = "ami-052efd3df9dad4825"
-  instance_type          = "t2.micro"
+  ami                    = var.ami
+  instance_type          = var.instance_type
   subnet_id              = aws_subnet.pub_subnet1.id
-  key_name               = "myawsdemokey"
+  key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.demo-sg-1.id]
 
   tags = {
