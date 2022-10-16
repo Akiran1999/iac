@@ -53,7 +53,7 @@ resource "aws_instance" "Demo-instance" {
   vpc_security_group_ids = [aws_security_group.demo-sg-1.id]
 
   tags = {
-    Name = "Demo-instance"
+    Name = "Demo-instance-1"
 
   }
 
